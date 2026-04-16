@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor   // generates a constructor with all fields
-@NoArgsConstructor 
 public class TransactionDto {
     private Long id;
     private BigDecimal amount; 
     private LocalDateTime transactionDate;
-    private int rewardPoints;
+    private double rewardPoints;
 }

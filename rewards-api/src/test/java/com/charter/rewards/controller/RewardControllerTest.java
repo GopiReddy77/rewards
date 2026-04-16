@@ -100,7 +100,7 @@ class RewardControllerTest {
                 21L,
                 "Alice",
                 "alice@example.com",
-                Collections.singletonMap("2026-03", 90),
+                Collections.singletonMap("2026-03", 90.0),
                 90,
                 Collections.emptyList()
         );
@@ -123,7 +123,7 @@ class RewardControllerTest {
                 21L,
                 "Bob",
                 "bob@example.com",
-                Collections.singletonMap("2026-03", 50),
+                Collections.singletonMap("2026-03", 50.0),
                 50,
                 Collections.emptyList()
         );

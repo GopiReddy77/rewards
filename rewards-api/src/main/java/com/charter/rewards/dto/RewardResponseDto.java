@@ -9,13 +9,12 @@ import java.util.Map;
 
 @Data
 @AllArgsConstructor   // generates a constructor with all fields
-@NoArgsConstructor 
 public class RewardResponseDto {
     private Long customerId;
     private String customerName;
     private String customerEmail;
-    private Map<String, Integer> monthlyPoints; // month-year -> points
-    private int totalPoints;
+    private Map<String, Double> monthlyPoints; // month-year -> points
+    private double totalPoints;
     private List<TransactionDto> transactions;
 
 }

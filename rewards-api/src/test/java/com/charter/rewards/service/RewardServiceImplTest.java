@@ -81,7 +81,7 @@ class RewardServiceImplTest {
         request.setMonths(3);
 
         Optional<RewardResponseDto> response = rewardService.getRewardsForCustomer(1L, request);
-        assertEquals(115, response.get().getTotalPoints()); // 90 + 25
+        assertEquals(115.0, response.get().getTotalPoints()); 
     }
 
     @Test
@@ -99,7 +99,7 @@ class RewardServiceImplTest {
         request.setTo(LocalDate.now());
 
         Optional<RewardResponseDto> response = rewardService.getRewardsForCustomer(2L, request);
-        assertEquals(250, response.get().getTotalPoints()); // (200-100)*2 + 50
+        assertEquals(250.0, response.get().getTotalPoints()); 
     }
 
     @Test
@@ -115,7 +115,7 @@ class RewardServiceImplTest {
         RewardRequestDto request = new RewardRequestDto();
 
         Optional<RewardResponseDto> response = rewardService.getRewardsForCustomer(3L, request);
-        assertEquals(10, response.get().getTotalPoints()); // 60 → 10 points
+        assertEquals(10.0, response.get().getTotalPoints()); 
     }
 
     @Test
@@ -132,7 +132,7 @@ class RewardServiceImplTest {
         request.setMonths(1);
 
         Optional<RewardResponseDto> response = rewardService.getRewardsForCustomer(4L, request);
-        assertEquals(0, response.get().getTotalPoints()); // below 50 → 0 points
+        assertEquals(0.0, response.get().getTotalPoints()); 
     }
 
     @Test
@@ -149,8 +149,8 @@ class RewardServiceImplTest {
         request.setMonths(1);
 
         Optional<RewardResponseDto> response = rewardService.getRewardsForCustomer(5L, request);
-        assertEquals(92, response.get().getTotalPoints()); // (120.75-100)*2 + 50 = 91.5 → 92
-        assertEquals(92, response.get().getTransactions().get(0).getRewardPoints());
+        assertEquals(91.5, response.get().getTotalPoints()); // (120.75-100)*2 + 50 = 91.5 → 92
+        assertEquals(91.5, response.get().getTransactions().get(0).getRewardPoints());
     }
 
     @Test
@@ -167,7 +167,7 @@ class RewardServiceImplTest {
         request.setMonths(1);
 
         Optional<RewardResponseDto> response = rewardService.getRewardsForCustomer(6L, request);
-        assertEquals(50, response.get().getTotalPoints()); // boundary case
+        assertEquals(50.0, response.get().getTotalPoints()); // boundary case
     }
 
     @Test
@@ -184,7 +184,7 @@ class RewardServiceImplTest {
         request.setMonths(1);
 
         Optional<RewardResponseDto> response = rewardService.getRewardsForCustomer(7L, request);
-        assertEquals(1999999850,response.get().getTotalPoints()); // sanity check
+        assertEquals(1999999849.98,response.get().getTotalPoints()); // sanity check
     }
     
     @Test
@@ -218,7 +218,7 @@ class RewardServiceImplTest {
         request.setMonths(1);
 
         Optional<RewardResponseDto> response = rewardService.getRewardsForCustomer(11L, request);
-        assertEquals(0, response.get().getTotalPoints()); 
+        assertEquals(0.0, response.get().getTotalPoints()); 
     }
     
     
@@ -243,7 +243,7 @@ class RewardServiceImplTest {
         assertEquals(120, response.get().getTotalPoints());
 
         String monthKey = now.format(DateTimeFormatter.ofPattern("yyyy-MM"));
-        assertEquals(120, response.get().getMonthlyPoints().get(monthKey));
+        assertEquals(120.0, response.get().getMonthlyPoints().get(monthKey));
     }
 
 

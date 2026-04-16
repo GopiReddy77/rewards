@@ -60,13 +60,13 @@ public class RewardServiceImpl implements RewardService {
         List<Transaction> transactions =
                 transactionRepository.findByCustomer_IdAndTransactionDateBetween(customerId, start, end);
 
-        Map<String, Integer> monthlyPoints = new HashMap<>();
+        Map<String, Double> monthlyPoints = new HashMap<>();
         List<TransactionDto> transactionDTOs = new ArrayList<>();
 
         for (Transaction t : transactions) {
-            int points = calculatePoints(t.getAmount());
+        	double  points = calculatePoints(t.getAmount());
             String month = t.getTransactionDate().format(MONTH_FORMATTER);
-            monthlyPoints.merge(month, points, Integer::sum);
+            monthlyPoints.merge(month, points, Double::sum);
 
             transactionDTOs.add(new TransactionDto(
                     t.getId(),
@@ -76,9 +76,9 @@ public class RewardServiceImpl implements RewardService {
             ));
         }
 
-        int totalPoints = monthlyPoints.values()
+        double  totalPoints = monthlyPoints.values()
                                        .stream()
-                                       .mapToInt(Integer::intValue)
+                                       .mapToDouble(Double::doubleValue)
                                        .sum();
         
         RewardResponseDto response = new RewardResponseDto(
@@ -93,17 +93,16 @@ public class RewardServiceImpl implements RewardService {
         return Optional.of(response);
     }
 
-    private int calculatePoints(BigDecimal amount) {
+    private double calculatePoints(BigDecimal amount) {
         if (amount.compareTo(HUNDRED) > 0) {
             return amount.subtract(HUNDRED)
-                         .setScale(0, RoundingMode.UP)
                          .multiply(BigDecimal.valueOf(2))
-                         .intValueExact() + 50;
+                         .add(BigDecimal.valueOf(50))
+                         .doubleValue();
         } else if (amount.compareTo(FIFTY) > 0) {
             return amount.subtract(FIFTY)
-                         .setScale(0, RoundingMode.UP)
-                         .intValueExact();
+                         .doubleValue();
         }
-        return 0;
+        return 0.0;
     }
 }
