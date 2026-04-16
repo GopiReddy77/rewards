@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-    List<Transaction> findByCustomerId(Long customerId);
-
     List<Transaction> findByCustomer_IdAndTransactionDateBetween(Long customerId,
             LocalDateTime from,
             LocalDateTime to);
